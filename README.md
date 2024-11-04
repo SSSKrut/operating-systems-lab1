@@ -1,2 +1,4 @@
-# cxx-template-earthly-clang
-Template for C++ projects
+# Shell realization (lab1 OS)
+
+ - ```fork()```
+ - ```Linux```
