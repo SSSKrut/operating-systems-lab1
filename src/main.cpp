@@ -8,10 +8,12 @@
 #include <string>
 #include <vector>
 
+#include "lib/utils.h"
+using namespace console::color;
 int main() {
     std::string input;
     while (true) {
-        std::cout << "shell> ";
+        std::cout << cyan() << "shell> " << reset();
         if (!std::getline(std::cin, input)) break;
 
         std::istringstream iss(input);
@@ -28,12 +30,12 @@ int main() {
 
         pid_t pid = fork();
         if (pid == -1) {
-            std::cerr << "failed to fork\n";
+            std::cerr << red() << "failed to fork\n" << reset();
             return 1;
         } else if (pid == 0) {
             execvp(args[0], args.data());
             // If all goes well, execvp never returns
-            std::cerr << "failed to execute command\n";
+            std::cerr << red() << "failed to execute command\n" << reset();
             for (char *arg : args) {
                 free(arg);
             }
