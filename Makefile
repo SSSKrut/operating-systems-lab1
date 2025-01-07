@@ -1,13 +1,16 @@
 CXX = clang++
 CXXFLAGS = -std=c++20 -Wall -Wextra -Werror -fsanitize=address,undefined
-INCLUDES = -Isrc/lib
+INCLUDES = -Isrc/lib/include
 
 SRC_DIR = ./src
 BUILD_DIR = ./build
 TEST_DIR = ./tests
 
-SRCS = $(wildcard $(SRC_DIR)/*.cpp) $(wildcard $(SRC_DIR)/lib/*.cpp)
-OBJS = $(SRCS:%.cpp=$(BUILD_DIR)/%.o)
+SRCS =	$(wildcard $(SRC_DIR)/*.cpp) \
+		$(wildcard $(SRC_DIR)/lib/core/*.cpp) \
+		$(wildcard $(SRC_DIR)/lib/commands/*.cpp)
+
+OBJS = $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(SRCS))
 
 .PHONY: all clean test format lint run help earth dry-run earth-run
 
@@ -17,7 +20,15 @@ $(BUILD_DIR)/program: $(OBJS)
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $^ -o $@
 
-$(BUILD_DIR)/%.o: %.cpp
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+$(BUILD_DIR)/lib/core/%.o: $(SRC_DIR)/lib/core/%.cpp
+	@mkdir -p $(@D)
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
+
+$(BUILD_DIR)/lib/commands/%.o: $(SRC_DIR)/lib/commands/%.cpp
 	@mkdir -p $(@D)
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
