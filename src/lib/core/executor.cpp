@@ -51,6 +51,10 @@ int Executor::execute(const std::vector<std::string>& args) {
     return WIFEXITED(status) ? WEXITSTATUS(status) : -1;
 }
 
+int Executor::execute(console::Command& command, const std::vector<std::string>& args) {
+    return command.execute(args);
+}
+
 double Executor::get_execution_time() const {
     std::chrono::duration<double> elapsed = end_time_ - start_time_;
     return elapsed.count();

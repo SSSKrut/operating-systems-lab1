@@ -11,6 +11,7 @@ int CdCommand::execute(const std::vector<std::string>& args) {
         std::cerr << "cd: missing argument\n";
         return 1;
     }
+    std::cout << "Changing directory to: " << args[1] << std::endl;
     if (chdir(args[1].c_str()) == -1) {
         std::cerr << "cd: failed to change directory\n";
         return 1;

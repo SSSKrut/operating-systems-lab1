@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+#include "core/command.h"
+
 namespace console {
 /**
  * @brief Executor class provides functionality to execute shell commands
@@ -13,6 +15,7 @@ namespace console {
 class Executor {
    public:
     int execute(const std::vector<std::string>& args);
+    int execute(console::Command& command, const std::vector<std::string>& args);
     double get_execution_time() const;
 
    private:
