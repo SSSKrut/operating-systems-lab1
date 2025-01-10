@@ -38,6 +38,7 @@ class Shell {
    public:
     void run();
     void add_command(const std::string& name, std::unique_ptr<Command> command);
+    void stop() { is_running_ = false; }
 
    private:
     std::unordered_map<std::string, std::unique_ptr<Command>> commands_;  // Is in fact an 'aliases'

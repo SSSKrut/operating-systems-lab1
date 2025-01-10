@@ -6,13 +6,7 @@
 //     }
 // };
 
-// class ExitCommand : public console::Command {
-//    public:
-//     int execute(const std::vector<std::string>& args) override {
-//         std::cout << args[0] << std::endl;
-//         exit(0);
-//     }
-// };
+
 
 // class HistoryCommand : public console::Command {
 //    public:
