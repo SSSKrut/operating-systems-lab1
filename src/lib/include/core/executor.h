@@ -4,6 +4,7 @@
 #include <vector>
 
 #include "core/command.h"
+#include "core/parser.h"
 
 namespace console {
 /**
@@ -15,7 +16,9 @@ namespace console {
 class Executor {
    public:
     int execute(const std::vector<std::string>& args);
-    int execute(console::Command& command, const std::vector<std::string>& args);
+    int execute(const std::vector<std::string>& args, bool is_background_task);
+    int execute(console::Command& command, const std::vector<std::string>& args,
+                bool is_background_task = false);
     double get_execution_time() const;
 
    private:

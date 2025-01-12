@@ -3,6 +3,7 @@
 #include <vector>
 
 namespace console {
+
 /**
  * @brief InputParser class provides functionality to parse input strings into arguments
  *

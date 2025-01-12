@@ -29,9 +29,19 @@ struct ShellHistoryStruct {
     std::vector<std::string> args;
     std::string output;
 };
+
 struct ExecutionReturn {
     int status;
     double elapsed;
+};
+
+struct ShellCommandStruct {
+    bool is_background_task{false};
+    std::vector<std::string> args;
+};
+
+struct ShellQueueStruct {
+    std::vector<ShellCommandStruct> commands;
 };
 
 class Shell {
@@ -46,8 +56,12 @@ class Shell {
     std::string input_;
     bool is_running_{true};
     bool parse_input(const std::string& input, std::vector<std::string>& args);
-    ExecutionReturn execute_command(const std::vector<std::string>& args);
-    ExecutionReturn execute_alias(const std::vector<std::string>& args);
+    bool split_commands(const std::vector<std::string>& commands, ShellQueueStruct& queue);
+    ExecutionReturn execute_command(const std::vector<std::string>& args,
+                                    bool is_background_task = false);
+    ExecutionReturn execute_alias(const std::vector<std::string>& args,
+                                  bool is_background_task = false);
+    ExecutionReturn execute(const ShellQueueStruct& queue);
     void exit();
     bool is_aliased(const std::string& command);
 };
