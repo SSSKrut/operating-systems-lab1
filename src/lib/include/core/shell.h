@@ -7,6 +7,39 @@
 #include "core/command.h"
 #include "core/executor.h"
 
+namespace console {
+struct ShellHistoryStruct {
+    std::vector<std::string> args;
+    std::string output;
+};
+
+struct ExecutionReturn {
+    int status;
+    double elapsed;
+};
+
+/**
+ * @brief ShellCommandStruct struct provides a shell command structure
+ *
+ * The ShellCommandStruct struct provides a shell command structure.
+ * The struct is used to store a separate shell command with its arguments.
+ */
+struct ShellCommandStruct {
+    bool is_background_task{false};
+    std::vector<std::string> args;
+};
+
+/**
+ * @brief ShellQueueStruct struct provides a queue of shell commands
+ *
+ * The ShellQueueStruct struct provides a queue of shell commands.
+ * The struct is used to store a list of shell commands that are executed
+ * in the shell one after the other.
+ */
+struct ShellQueueStruct {
+    std::vector<ShellCommandStruct> commands;
+};
+
 /**
  * @brief Shell class provides command-line interface functionality with command and alias support
  *
@@ -24,26 +57,6 @@
  * - Current input state
  * - Shell running state
  */
-namespace console {
-struct ShellHistoryStruct {
-    std::vector<std::string> args;
-    std::string output;
-};
-
-struct ExecutionReturn {
-    int status;
-    double elapsed;
-};
-
-struct ShellCommandStruct {
-    bool is_background_task{false};
-    std::vector<std::string> args;
-};
-
-struct ShellQueueStruct {
-    std::vector<ShellCommandStruct> commands;
-};
-
 class Shell {
    public:
     void run();
