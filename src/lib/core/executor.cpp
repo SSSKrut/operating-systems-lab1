@@ -28,7 +28,8 @@ int Executor::execute(const std::vector<std::string>& args, bool is_background_t
     start_time_ = std::chrono::high_resolution_clock::now();
     pid_t pid = fork();
     if (pid == -1) {
-        std::cerr << color::red() << "failed to fork in background process:\n" << color::reset();
+        std::cerr << color::red() << "failed to fork in background process:" << color::reset()
+                  << std::endl;
         end_time_ = std::chrono::high_resolution_clock::now();
         return 1;
     } else if (pid == 0) {
@@ -39,8 +40,8 @@ int Executor::execute(const std::vector<std::string>& args, bool is_background_t
         c_args.push_back(nullptr);
 
         execvp(c_args[0], c_args.data());
-        std::cerr << color::red() << "failed to execute command in background process\n"
-                  << color::reset();
+        std::cerr << color::red() << "failed to execute command in background process"
+                  << color::reset() << std::endl;
 
         clean_up(c_args);
         exit(1);
@@ -59,7 +60,7 @@ int Executor::execute(const std::vector<std::string>& args) {
     pid_t pid = fork();
 
     if (pid == -1) {
-        std::cerr << color::red() << "failed to fork\n" << color::reset();
+        std::cerr << color::red() << "failed to fork" << color::reset() << std::endl;
         end_time_ = std::chrono::high_resolution_clock::now();
         return 1;
     } else if (pid == 0) {
@@ -70,7 +71,7 @@ int Executor::execute(const std::vector<std::string>& args) {
         c_args.push_back(nullptr);
 
         execvp(c_args[0], c_args.data());
-        std::cerr << color::red() << "failed to execute command\n" << color::reset();
+        std::cerr << color::red() << "failed to execute command" << color::reset() << std::endl;
 
         clean_up(c_args);
         exit(1);

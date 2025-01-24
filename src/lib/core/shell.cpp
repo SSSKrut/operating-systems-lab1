@@ -18,7 +18,7 @@ namespace console {
 void Shell::run() {
     std::string input;
     while (is_running_) {
-        std::cout << color::cyan() << "shell> " << color::reset();
+        std::cout << color::cyan() << "shell>" << color::reset() << " ";
 
         if (!std::getline(std::cin, input)) break;
 
@@ -34,7 +34,7 @@ void Shell::run() {
 
         std::cout << color::green() << "status: " << returned.status
                   << " eta: " << returned.elapsed;
-        std::cout << std::endl << color::reset();
+        std::cout << color::reset() << std::endl;
     }
 }
 
