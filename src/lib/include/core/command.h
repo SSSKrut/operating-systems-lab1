@@ -1,9 +1,6 @@
 // command.h
 #pragma once
-#include <unistd.h>
 
-#include <iostream>
-#include <memory>
 #include <string>
 #include <vector>
 namespace console {

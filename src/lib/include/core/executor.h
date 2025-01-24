@@ -4,7 +4,6 @@
 #include <vector>
 
 #include "core/command.h"
-#include "core/parser.h"
 
 namespace console {
 /**
