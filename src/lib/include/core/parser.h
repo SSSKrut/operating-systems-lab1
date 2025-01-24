@@ -14,6 +14,5 @@ namespace console {
 class InputParser {
    public:
     void parse(const std::string& input, std::vector<std::string>& args);
-    static std::vector<char*> to_c_args(const std::vector<std::string>& args);
 };
 }  // namespace console

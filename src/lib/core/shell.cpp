@@ -87,7 +87,7 @@ void Shell::add_command(const std::string& name, std::unique_ptr<Command> comman
 
 ExecutionReturn Shell::execute_command(const std::vector<std::string>& args,
                                        bool is_background_task) {
-    ExecutionReturn ret = {-1, 0.0};
+    ExecutionReturn ret = {.status = -1, .elapsed = 0.0};
     Executor executor;
     ret.status = executor.execute(args, is_background_task);
     ret.elapsed = executor.get_execution_time();
@@ -104,7 +104,7 @@ bool Shell::is_aliased(const std::string& command) {
 ExecutionReturn Shell::execute_alias(const std::vector<std::string>& args,
                                      bool is_background_task) {
     (void)is_background_task;
-    ExecutionReturn ret = {-1, 0.0};
+    ExecutionReturn ret = {.status = -1, .elapsed = 0.0};
     auto it = commands_.find(args[0]);
     if (it == commands_.end()) return ret;
 
@@ -116,7 +116,7 @@ ExecutionReturn Shell::execute_alias(const std::vector<std::string>& args,
 }
 
 ExecutionReturn Shell::execute(const ShellQueueStruct& queue) {
-    ExecutionReturn ret = {0, 0.0};
+    ExecutionReturn ret = {.status = 0, .elapsed = 0.0};
     double elapsed = 0.0;
     for (const auto& command : queue.commands) {
         ret = is_aliased(command.args[0])
