@@ -33,16 +33,17 @@ class Colorizer {
     Style style_;
 };
 
-inline std::string colorize(const std::string& text, Color color, Style style = Style::Reset) {
+static inline std::string colorize(const std::string& text, Color color,
+                                   Style style = Style::Reset) {
     return "\033[" + std::to_string(static_cast<int>(style)) + ";" +
            std::to_string(static_cast<int>(color)) + "m" + text + "\033[0m";
 }
 
-inline Colorizer red() { return Colorizer(Color::Red); }
-inline Colorizer green() { return Colorizer(Color::Green); }
-inline Colorizer yellow() { return Colorizer(Color::Yellow); }
-inline Colorizer blue() { return Colorizer(Color::Blue); }
-inline Colorizer cyan() { return Colorizer(Color::Cyan); }
-inline Colorizer reset() { return Colorizer(Color::Reset); }
+static inline Colorizer red() { return Colorizer(Color::Red); }
+static inline Colorizer green() { return Colorizer(Color::Green); }
+static inline Colorizer yellow() { return Colorizer(Color::Yellow); }
+static inline Colorizer blue() { return Colorizer(Color::Blue); }
+static inline Colorizer cyan() { return Colorizer(Color::Cyan); }
+static inline Colorizer reset() { return Colorizer(Color::Reset); }
 
 }  // namespace console::color
