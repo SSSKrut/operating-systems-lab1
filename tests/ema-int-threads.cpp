@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     if (argc > 1) repeats = std::stoi(argv[1]);
     if (argc > 2) threadCount = std::stoi(argv[2]);
 
-    std::atomic<double> totalResult{0.0};
+    std::atomic<int> totalResult{0};
     std::vector<std::thread> threads;
 
     for (size_t i = 0; i < threadCount; ++i) {
